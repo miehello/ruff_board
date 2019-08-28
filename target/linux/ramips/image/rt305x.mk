@@ -769,6 +769,18 @@ define Device/olimex_rt5350f-olinuxino-evb
 endef
 TARGET_DEVICES += olimex_rt5350f-olinuxino-evb
 
+define Device/ruff
+  MTK_SOC := rt5350
+  IMAGE_SIZE := 7872k
+  DEVICE_VENDOR := NANCHAO
+  DEVICE_MODEL := RUFF
+  DEVICE_PACKAGES := kmod-usb-core kmod-usb-ohci kmod-usb2 \
+		kmod-i2c-core kmod-i2c-ralink \
+		kmod-spi-dev
+  SUPPORTED_DEVICES += RUFF
+endef
+TARGET_DEVICES += ruff
+
 define Device/omnima_miniembplug
   MTK_SOC := rt5350
   IMAGE_SIZE := 7872k
