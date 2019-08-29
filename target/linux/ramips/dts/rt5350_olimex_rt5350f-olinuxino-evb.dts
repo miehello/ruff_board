@@ -144,7 +144,7 @@
 						10 14 18 1c
 						20 24 ];
 
-			status = "disabled";
+			status = "okay";
 		};
 
 		i2c: i2c@900 {
@@ -234,7 +234,6 @@
 		systick: systick@d00 {
 			compatible = "ralink,rt5350-systick", "ralink,cevt-systick";
 			reg = <0xd00 0x10>;
-
 			interrupt-parent = <&cpuintc>;
 			interrupts = <7>;
 		};
@@ -277,7 +276,15 @@
 		pinctrl-0 = <&state_default>;
 
 		state_default: pinctrl0 {
+			linux,phandle = < 0x09 >;
+			phandle = < 0x09 >;
+
+			gpio {
+				ralink,group = "jtag","led";
+				ralink,function = "gpio";
+			};	
 		};
+	
 
 		i2c_pins: i2c_pins {
 			i2c_pins {
@@ -400,7 +407,6 @@
 		#size-cells = <0>;
 		compatible = "generic-ohci";
 		reg = <0x101c1000 0x1000>;
-
 		phys = <&usbphy>;
 		phy-names = "usb";
 
@@ -417,52 +423,24 @@
 		compatible = "gpio-export";
 		#size-cells = <0>;
 
-		gpio0 {
-			gpio-export,name = "gpio0";
-			gpio-export,direction_may_change = < 0x01 >;
-			gpios = < 0x0c 0x00 0x00 >;
-		};
-
-		gpio17 {
-			gpio-export,name = "gpio17";
-			gpio-export,direction_may_change = < 0x01 >;
-			gpios = < 0x0c 0x11 0x00 >;
-		};
-
-		gpio19 {
-			gpio-export,name = "gpio19";
-			gpio-export,direction_may_change = < 0x01 >;
-			gpios = < 0x0c 0x13 0x00 >;
-		};
-
-		gpio21 {
-			gpio-export,name = "gpio21";
-			gpio-export,direction_may_change = < 0x01 >;
-			gpios = < 0x0c 0x15 0x00 >;
-		};
 
 		gpio22 {
 			gpio-export,name = "gpio22";
 			gpio-export,output = < 0x02 >;
 			gpio-export,direction_may_change = < 0x01 >;
-			gpios = < 0x0d 0x00 0x00 >;
+			gpios = < &gpio1  0x00 0x00 >;
 		};
 
 		gpio23 {
 			gpio-export,name = "gpio23";
 			gpio-export,direction_may_change = < 0x01 >;
-			gpios = < 0x0d 0x01 0x00 >;
+			gpios = < &gpio1 0x01 0x00 >;
 		};
 
 		gpio24 {
 			gpio-export,name = "gpio24";
 			gpio-export,direction_may_change = < 0x01 >;
-			gpios = < 0x0d 0x02 0x00 >;
-		};
-
-		button {
-			gpio-export,name = "button";
-			gpios = <&gpio0 0 GPIO_ACTIVE_LOW>;
+			gpios = < &gpio1 0x02 0x00 >;
 		};
 	};
 };
